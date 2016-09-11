@@ -13,7 +13,7 @@ You should have Bootstrap 4 installed already in your app.
 
 1. install the package:
 ```
-npm install react-boostrap-tabs --save
+npm install react-bootstrap-tabs --save
 ```
 
 ### 2. Import component
