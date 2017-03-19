@@ -88,7 +88,7 @@ describe('Tabs', () => {
                 expect(wrapper.find('.class1').length).to.equal(2);
             });
 
-            it('should render a custom class for the tab content if one is specified at the tabs level ', () => {
+            it('should render a custom class for the tab content if one is specified at the tabs level', () => {
                 // act
                 const wrapper = mount(<Tabs contentClass="class1"><Tab label="Tab 1">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
 
@@ -104,7 +104,7 @@ describe('Tabs', () => {
                 expect(wrapper.find('.class1').length).to.equal(1);
             });
 
-            it('should render a custom class for the tab content if one is specified at the tab level ', () => {
+            it('should render a custom class for the tab content if one is specified at the tab level', () => {
                 // act
                 const wrapper = mount(<Tabs><Tab label="Tab 1" className="class1">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
 
@@ -112,7 +112,7 @@ describe('Tabs', () => {
                 expect(wrapper.find('.tab-content .class1').length).to.equal(1);
             });
 
-            it('should render the custom class for the header at the tab level  in preference to that at the tabs level if both are specified', () => {
+            it('should render the custom class for the header at the tab level in preference to that at the tabs level if both are specified', () => {
                 // act
                 const wrapper = mount(<Tabs headerClass="class1"><Tab label="Tab 1" headerClass="class2">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
 
@@ -129,6 +129,104 @@ describe('Tabs', () => {
             });
         });
 
+        describe('custom styles', () => {
+
+            it('should render a custom style for the tab container if one is specified', () => {
+                // act
+                const wrapper = mount(<Tabs style={{color:'blue'}}><Tab label="Tab 1" c>Tab 1</Tab></Tabs>);
+
+                // assert
+                expect(wrapper.getDOMNode().getAttribute('style')).to.equal('color: blue;');
+            });
+
+            it('should render a custom style for each tab header if one is specified at the tabs level', () => {
+                // act
+                const wrapper = mount(<Tabs headerStyle={{color:'blue'}}><Tab label="Tab 1">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
+
+                // assert
+                const actual = wrapper.find('.nav-item a');
+                expect(actual.length).to.equal(2);
+                actual.forEach(header => {
+                    expect(header.getDOMNode().getAttribute('style')).to.equal('color: blue;');
+                });
+            });
+
+            it('should render a custom style for the tab content if one is specified at the tabs level', () => {
+                // act
+                const wrapper = mount(<Tabs contentStyle={{color:'blue'}}><Tab label="Tab 1">Tab 1</Tab></Tabs>);
+
+                // assert
+                const actual = wrapper.find('.tab-content');
+                expect(actual.length).to.equal(1);
+                expect(actual.getDOMNode().getAttribute('style')).to.equal('color: blue;');
+            });
+
+            it('should render a custom style for the tab header if one is specified at the tab level', () => {
+                // act
+                const wrapper = mount(<Tabs><Tab label="Tab 1" headerStyle={{color:'blue'}}>Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
+
+                // assert
+                const actual = wrapper.find('.nav-item a');
+                expect(actual.length).to.equal(2);
+                // The first one will have a custom style but not the second
+                expect(actual.first().getDOMNode().getAttribute('style')).to.equal('color: blue;');
+                expect(actual.last().getDOMNode().getAttribute('style')).to.equal(null);
+
+            });
+
+            it('should render a custom style for the tab content if one is specified at the tab level', () => {
+                // act
+                const wrapper = mount(<Tabs><Tab label="Tab 1" style={{color:'blue'}}>Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
+
+                // assert
+                const actual = wrapper.find('.tab-content');
+                expect(actual.length).to.equal(1);
+                expect(actual.getDOMNode().getAttribute('style')).to.equal('color: blue;');
+            });
+
+            it('should render the custom style for the header at the tab level in preference to that at the tabs level if both are specified for the same value', () => {
+                // act
+                const wrapper = mount(<Tabs headerStyle={{color:'blue'}}><Tab label="Tab 1" headerStyle={{color:'red'}}>Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
+
+                // assert
+                const actual = wrapper.find('.nav-item a');
+                expect(actual.length).to.equal(2);
+                // The first one will have a the Tab level colour, but the second will have the Tabs level one
+                expect(actual.first().getDOMNode().getAttribute('style')).to.equal('color: red;');
+                expect(actual.last().getDOMNode().getAttribute('style')).to.equal('color: blue;');
+            });
+
+            it('should merge the custom style for the header at the tab level with that at the tabs level if both are specified for different values', () => {
+                // act
+                const wrapper = mount(<Tabs headerStyle={{backgroundColor:'blue'}}><Tab label="Tab 1" headerStyle={{color:'red'}}>Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
+
+                // assert
+                const actual = wrapper.find('.nav-item a');
+                expect(actual.length).to.equal(2);
+                // The first one will have a custom style but not the second
+                expect(actual.first().getDOMNode().getAttribute('style')).to.equal('background-color: blue; color: red;');
+            });
+
+            it('should render the custom style for content at the tab level in preference to that at the tabs level if both are specified for the same value', () => {
+                // act
+                const wrapper = mount(<Tabs contentStyle={{color:'blue'}}><Tab label="Tab 1" style={{color:'red'}}>Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
+
+                // assert
+                const actual = wrapper.find('.tab-content');
+
+                expect(actual.getDOMNode().getAttribute('style')).to.equal('color: red;');
+            });
+
+            it('should merge the custom style for content at the tab level with that at the tabs level if both are specified for different values', () => {
+                // act
+                const wrapper = mount(<Tabs contentStyle={{backgroundColor:'blue'}}><Tab label="Tab 1" style={{color:'red'}}>Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
+
+                // assert
+                const actual = wrapper.find('.tab-content');
+
+                expect(actual.getDOMNode().getAttribute('style')).to.equal('background-color: blue; color: red;');
+            });
+        });
     });
 
     describe('behaviour', () => {
