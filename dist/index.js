@@ -82,7 +82,7 @@
         function TabsComponent(props) {
             _classCallCheck(this, TabsComponent);
 
-            var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TabsComponent).call(this, props));
+            var _this = _possibleConstructorReturn(this, (TabsComponent.__proto__ || Object.getPrototypeOf(TabsComponent)).call(this, props));
 
             _this._renderHeader = function (tab, index) {
                 var isActive = false;
@@ -150,8 +150,6 @@
         }, {
             key: '_renderContent',
             value: function _renderContent() {
-                var _this2 = this;
-
                 if (this.props.children === undefined) {
                     return null;
                 }
@@ -177,18 +175,16 @@
                         }
                     }
                 } else {
-                    (function () {
-                        // selected is a string - should be the tab label so find the index of that tab
-                        var selectedLabel = _this2.state.selected;
-                        selectedIndex = onlyOneChild ? 0 : _this2.props.children.findIndex(function (child) {
-                            return selectedLabel === child.props.label;
-                        });
-                        if (selectedIndex < 0) {
-                            console.warn('tab \'' + _this2.state.selected + '\' not found, defaulting to first tab');
-                            selectedIndex = 0;
-                            selected = onlyOneChild ? _this2.props.children.props.label : _this2.props.children[selectedIndex].props.label;
-                        }
-                    })();
+                    // selected is a string - should be the tab label so find the index of that tab
+                    var selectedLabel = this.state.selected;
+                    selectedIndex = onlyOneChild ? 0 : this.props.children.findIndex(function (child) {
+                        return selectedLabel === child.props.label;
+                    });
+                    if (selectedIndex < 0) {
+                        console.warn('tab \'' + this.state.selected + '\' not found, defaulting to first tab');
+                        selectedIndex = 0;
+                        selected = onlyOneChild ? this.props.children.props.label : this.props.children[selectedIndex].props.label;
+                    }
                 }
 
                 // If the selected tab has changed then we need to update the state
@@ -296,7 +292,7 @@
         function TabComponent(props) {
             _classCallCheck(this, TabComponent);
 
-            return _possibleConstructorReturn(this, Object.getPrototypeOf(TabComponent).call(this, props));
+            return _possibleConstructorReturn(this, (TabComponent.__proto__ || Object.getPrototypeOf(TabComponent)).call(this, props));
         }
 
         _createClass(TabComponent, [{
