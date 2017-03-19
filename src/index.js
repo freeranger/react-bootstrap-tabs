@@ -22,9 +22,14 @@ class TabsComponent extends React.Component {
         selected: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
 
         /**
-         * Optional CSS class to apply to the component overall
+         * Optional CSS class to apply to the Tabs component overall
          */
         className: React.PropTypes.string,
+
+        /**
+         * Optional CSS style to apply to the Tabs component overall
+         */
+        style: React.PropTypes.object,
 
         /**
          * Optional CSS class to apply to each tab header
@@ -32,14 +37,29 @@ class TabsComponent extends React.Component {
         headerClass: React.PropTypes.string,
 
         /**
+         * Optional CSS style to apply to each tab header
+         */
+        headerStyle: React.PropTypes.object,
+        
+        /**
          * Optional CSS class to apply to the active tab header
          */
         activeHeaderClass: React.PropTypes.string,
+        
+        /**
+         * Optional CSS style to apply to the active tab header
+         */
+        activeHeaderStyle: React.PropTypes.object,
 
         /**
          * Optional CSS class to apply to the content container for the currently selected tab
          */
         contentClass: React.PropTypes.string,
+        
+        /**
+         * Optional CSS style to apply to the content container for the currently selected tab
+         */
+        contentStyle: React.PropTypes.object,
 
         /**
          * Optional method to call when a tab is selected.  Receive the tab index and tab label of the selected tab
@@ -47,9 +67,9 @@ class TabsComponent extends React.Component {
         onSelect: React.PropTypes.func,
 
         /**
-         * At least one tab is required - otherwise there's no point rendering this!
+         * The child tabs to display - either an array or an element
          */
-        children: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.element]).isRequired
+        children: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.element])
 
     }
 
@@ -73,7 +93,7 @@ class TabsComponent extends React.Component {
         const classNames = classes('tabs', this.props.className);
 
         return (
-            <div className={classNames}>
+            <div className={classNames} style={this.props.style}>
                 {this._renderHeaders()}
                 {this._renderContent()}
             </div>
@@ -113,15 +133,17 @@ class TabsComponent extends React.Component {
             isActive = this.state.selected === tab.props.label;
         }
 
-        const customHeaderClass = tab.props.headerClass ? tab.props.headerClass : (this.props.headerClass ? this.props.headerClass : null);
-        const customActiveHeaderClass = !isActive ? null : tab.props.activeHeaderClass || tab.props.activeHeaderClass || 'active';
-        let linkClasses = classes('nav-link', customHeaderClass, customActiveHeaderClass, {
+        const customActiveHeaderClass = !isActive ? null : classes('active', this.props.activeHeaderClass, tab.props.activeHeaderClass);
+        let linkClasses = classes('nav-link', this.props.headerClass, tab.props.headerClass, customActiveHeaderClass, {
             'disabled': tab.props.disabled
         });
 
+        const customActiveHeaderStyle = !isActive ? null : Object.assign({}, this.props.activeHeaderStyle, tab.props.activeHeaderStyle);
+        const linkStyle = Object.assign({}, this.props.headerStyle, tab.props.headerStyle, customActiveHeaderStyle);
+
         return (
-            <li key={index} className="nav-item">
-                <a className={linkClasses} onClick={tab.props.disabled ? null : this._handleClick.bind(this, index)}>{tab.props.label}</a>
+            <li key={index} className="nav-item" >
+                <a className={linkClasses} style={linkStyle} onClick={tab.props.disabled ? null : this._handleClick.bind(this, index)}>{tab.props.label}</a>
             </li>
         );
     };
@@ -174,10 +196,11 @@ class TabsComponent extends React.Component {
         }
 
         const contentTab = onlyOneChild ? this.props.children : this.props.children[selectedIndex];
-        const contentClassNames = classes('tab-content', contentTab.props.contentClass || this.props.contentClass);
+        const contentClassNames = classes('tab-content', this.props.contentClass, contentTab.props.className);
+        const contentStyle = Object.assign({}, this.props.contentStyle, contentTab.props.style);
 
         return (
-            <div className={contentClassNames}>
+            <div className={contentClassNames} style={contentStyle}>
                 {contentTab}
             </div>
         );
@@ -219,19 +242,34 @@ class TabComponent extends React.Component {
         disabled: React.PropTypes.bool,
 
         /**
+         * Optional CSS class to apply to the tab overall
+         */
+        className: React.PropTypes.string,
+
+        /**
+         * Optional CSS style to apply to the tab overall
+         */
+        style: React.PropTypes.object,
+
+        /**
          * Optional CSS class to apply to the tab header
          */
         headerClass: React.PropTypes.string,
+ 
+       /**
+         * Optional CSS style to apply to the tab header
+         */
+        headerStyle: React.PropTypes.object,
 
+        /**
+         * Optional CSS style to apply to the active tab header
+         */
+        activeHeaderStyle: React.PropTypes.object,
+        
         /**
          * Optional CSS class to apply to the tab header when active
          */
         activeHeaderClass: React.PropTypes.string,
-
-        /**
-         * Optional CSS class to apply to the content container when the tab is displayed
-         */
-        contentClass: React.PropTypes.string
     }
 
     constructor(props) {

@@ -70,61 +70,65 @@ describe('Tabs', () => {
             expect(wrapper.find('.tab-content').text()).to.equal('One lonely tab');
         });
 
-        it('should render a custom class for the tab container if one is specified', () => {
-            // act
-            const wrapper = mount(<Tabs className="class1"><Tab label="Tab 1" c>Tab 1</Tab></Tabs>);
+        describe('custom classes', () => {
 
-            // assert
-            expect(wrapper.find('.class1').length).to.equal(1);
+            it('should render a custom class for the tab container if one is specified', () => {
+                // act
+                const wrapper = mount(<Tabs className="class1"><Tab label="Tab 1" c>Tab 1</Tab></Tabs>);
+
+                // assert
+                expect(wrapper.find('.class1').length).to.equal(1);
+            });
+
+            it('should render a custom class for each tab header if one is specified at the tabs level', () => {
+                // act
+                const wrapper = mount(<Tabs headerClass="class1"><Tab label="Tab 1">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
+
+                // assert
+                expect(wrapper.find('.class1').length).to.equal(2);
+            });
+
+            it('should render a custom class for the tab content if one is specified at the tabs level ', () => {
+                // act
+                const wrapper = mount(<Tabs contentClass="class1"><Tab label="Tab 1">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
+
+                // assert
+                expect(wrapper.find('.tab-content .class1').length).to.equal(1);
+            });
+
+            it('should render a custom class for the tab header if one is specified at the tab level', () => {
+                // act
+                const wrapper = mount(<Tabs><Tab label="Tab 1" headerClass="class1">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
+
+                // assert
+                expect(wrapper.find('.class1').length).to.equal(1);
+            });
+
+            it('should render a custom class for the tab content if one is specified at the tab level ', () => {
+                // act
+                const wrapper = mount(<Tabs><Tab label="Tab 1" className="class1">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
+
+                // assert
+                expect(wrapper.find('.tab-content .class1').length).to.equal(1);
+            });
+
+            it('should render the custom class for the header at the tab level  in preference to that at the tabs level if both are specified', () => {
+                // act
+                const wrapper = mount(<Tabs headerClass="class1"><Tab label="Tab 1" headerClass="class2">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
+
+                // assert
+                expect(wrapper.find('.class2').length).to.equal(1);
+            });
+
+            it('should render the custom class for content at the tab level in preference to that at the tabs level if both are specified', () => {
+                // act
+                const wrapper = mount(<Tabs contentClass="class1"><Tab label="Tab 1" className="class2">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
+
+                // assert
+                expect(wrapper.find('.tab-content .class2').length).to.equal(1);
+            });
         });
 
-        it('should render a custom class for each tab header if one is specified at the tabs level', () => {
-            // act
-            const wrapper = mount(<Tabs headerClass="class1"><Tab label="Tab 1">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
-
-            // assert
-            expect(wrapper.find('.class1').length).to.equal(2);
-        });
-
-        it('should render a custom class for the tab content if one is specified at the tabs level ', () => {
-            // act
-            const wrapper = mount(<Tabs contentClass="class1"><Tab label="Tab 1">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
-
-            // assert
-            expect(wrapper.find('.tab-content .class1').length).to.equal(1);
-        });
-
-        it('should render a custom class for the tab header if one is specified at the tab level', () => {
-            // act
-            const wrapper = mount(<Tabs><Tab label="Tab 1" headerClass="class1">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
-
-            // assert
-            expect(wrapper.find('.class1').length).to.equal(1);
-        });
-
-        it('should render a custom class for the tab content if one is specified at the tab level ', () => {
-            // act
-            const wrapper = mount(<Tabs><Tab label="Tab 1" contentClass="class1">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
-
-            // assert
-            expect(wrapper.find('.tab-content .class1').length).to.equal(1);
-        });
-
-        it('should render the custom class for the header at the tab level  in preference to that at the tabs level if both are specified', () => {
-            // act
-            const wrapper = mount(<Tabs headerClass="class1"><Tab label="Tab 1" headerClass="class2">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
-
-            // assert
-            expect(wrapper.find('.class2').length).to.equal(1);
-        });
-
-        it('should render the custom class for content at the tab level in preference to that at the tabs level if both are specified', () => {
-            // act
-            const wrapper = mount(<Tabs contentClass="class1"><Tab label="Tab 1" contentClass="class2">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
-
-            // assert
-            expect(wrapper.find('.tab-content .class2').length).to.equal(1);
-        });
     });
 
     describe('behaviour', () => {

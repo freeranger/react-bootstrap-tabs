@@ -92,18 +92,20 @@
                     isActive = _this.state.selected === tab.props.label;
                 }
 
-                var customHeaderClass = tab.props.headerClass ? tab.props.headerClass : _this.props.headerClass ? _this.props.headerClass : null;
-                var customActiveHeaderClass = !isActive ? null : tab.props.activeHeaderClass || tab.props.activeHeaderClass || 'active';
-                var linkClasses = (0, _classnames2.default)('nav-link', customHeaderClass, customActiveHeaderClass, {
+                var customActiveHeaderClass = !isActive ? null : (0, _classnames2.default)('active', _this.props.activeHeaderClass, tab.props.activeHeaderClass);
+                var linkClasses = (0, _classnames2.default)('nav-link', _this.props.headerClass, tab.props.headerClass, customActiveHeaderClass, {
                     'disabled': tab.props.disabled
                 });
+
+                var customActiveHeaderStyle = !isActive ? null : Object.assign({}, _this.props.activeHeaderStyle, tab.props.activeHeaderStyle);
+                var linkStyle = Object.assign({}, _this.props.headerStyle, tab.props.headerStyle, customActiveHeaderStyle);
 
                 return _react2.default.createElement(
                     'li',
                     { key: index, className: 'nav-item' },
                     _react2.default.createElement(
                         'a',
-                        { className: linkClasses, onClick: tab.props.disabled ? null : _this._handleClick.bind(_this, index) },
+                        { className: linkClasses, style: linkStyle, onClick: tab.props.disabled ? null : _this._handleClick.bind(_this, index) },
                         tab.props.label
                     )
                 );
@@ -127,7 +129,7 @@
 
                 return _react2.default.createElement(
                     'div',
-                    { className: classNames },
+                    { className: classNames, style: this.props.style },
                     this._renderHeaders(),
                     this._renderContent()
                 );
@@ -195,11 +197,12 @@
                 }
 
                 var contentTab = onlyOneChild ? this.props.children : this.props.children[selectedIndex];
-                var contentClassNames = (0, _classnames2.default)('tab-content', contentTab.props.contentClass || this.props.contentClass);
+                var contentClassNames = (0, _classnames2.default)('tab-content', this.props.contentClass, contentTab.props.className);
+                var contentStyle = Object.assign({}, this.props.contentStyle, contentTab.props.style);
 
                 return _react2.default.createElement(
                     'div',
-                    { className: contentClassNames },
+                    { className: contentClassNames, style: contentStyle },
                     contentTab
                 );
             }
@@ -224,9 +227,14 @@
         selected: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.string]),
 
         /**
-         * Optional CSS class to apply to the component overall
+         * Optional CSS class to apply to the Tabs component overall
          */
         className: _react2.default.PropTypes.string,
+
+        /**
+         * Optional CSS style to apply to the Tabs component overall
+         */
+        style: _react2.default.PropTypes.object,
 
         /**
          * Optional CSS class to apply to each tab header
@@ -234,9 +242,19 @@
         headerClass: _react2.default.PropTypes.string,
 
         /**
+         * Optional CSS style to apply to each tab header
+         */
+        headerStyle: _react2.default.PropTypes.object,
+
+        /**
          * Optional CSS class to apply to the active tab header
          */
         activeHeaderClass: _react2.default.PropTypes.string,
+
+        /**
+         * Optional CSS style to apply to the active tab header
+         */
+        activeHeaderStyle: _react2.default.PropTypes.object,
 
         /**
          * Optional CSS class to apply to the content container for the currently selected tab
@@ -244,14 +262,19 @@
         contentClass: _react2.default.PropTypes.string,
 
         /**
+         * Optional CSS style to apply to the content container for the currently selected tab
+         */
+        contentStyle: _react2.default.PropTypes.object,
+
+        /**
          * Optional method to call when a tab is selected.  Receive the tab index and tab label of the selected tab
          */
         onSelect: _react2.default.PropTypes.func,
 
         /**
-         * At least one tab is required - otherwise there's no point rendering this!
+         * The child tabs to display - either an array or an element
          */
-        children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.array, _react2.default.PropTypes.element]).isRequired
+        children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.array, _react2.default.PropTypes.element])
 
     };
     TabsComponent.defaultProps = {
@@ -302,19 +325,34 @@
         disabled: _react2.default.PropTypes.bool,
 
         /**
+         * Optional CSS class to apply to the tab overall
+         */
+        className: _react2.default.PropTypes.string,
+
+        /**
+         * Optional CSS style to apply to the tab overall
+         */
+        style: _react2.default.PropTypes.object,
+
+        /**
          * Optional CSS class to apply to the tab header
          */
         headerClass: _react2.default.PropTypes.string,
 
         /**
-         * Optional CSS class to apply to the tab header when active
-         */
-        activeHeaderClass: _react2.default.PropTypes.string,
+          * Optional CSS style to apply to the tab header
+          */
+        headerStyle: _react2.default.PropTypes.object,
 
         /**
-         * Optional CSS class to apply to the content container when the tab is displayed
+         * Optional CSS style to apply to the active tab header
          */
-        contentClass: _react2.default.PropTypes.string
+        activeHeaderStyle: _react2.default.PropTypes.object,
+
+        /**
+         * Optional CSS class to apply to the tab header when active
+         */
+        activeHeaderClass: _react2.default.PropTypes.string
     };
     ;
 
