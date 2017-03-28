@@ -1,4 +1,4 @@
-# React Bootstrap 4 Tabs
+# React Tabs component using Bootstrap 4
 
 This is a react component to render tabs using <a href="http://v4-alpha.getbootstrap.com/">Bootstrap 4</a> classes.
 You should have Bootstrap 4 installed already in your app.
