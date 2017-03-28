@@ -1,7 +1,7 @@
 {
   "name": "react-bootstrap-tabs",
   "version": "1.0.0",
-  "description": "React Bootstrap 4 Tabs",
+  "description": "react tabs component using bootstrap 4",
   "repository": {
     "type": "git",
     "url": "https://github.com/freeranger/react-bootstrap-tabs.git"
