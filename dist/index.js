@@ -1,16 +1,16 @@
 (function (global, factory) {
     if (typeof define === "function" && define.amd) {
-        define(['exports', 'react', 'classnames'], factory);
+        define(['exports', 'react', 'classnames', 'prop-types'], factory);
     } else if (typeof exports !== "undefined") {
-        factory(exports, require('react'), require('classnames'));
+        factory(exports, require('react'), require('classnames'), require('prop-types'));
     } else {
         var mod = {
             exports: {}
         };
-        factory(mod.exports, global.react, global.classnames);
+        factory(mod.exports, global.react, global.classnames, global.propTypes);
         global.index = mod.exports;
     }
-})(this, function (exports, _react, _classnames) {
+})(this, function (exports, _react, _classnames, _propTypes) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
@@ -21,6 +21,8 @@
     var _react2 = _interopRequireDefault(_react);
 
     var _classnames2 = _interopRequireDefault(_classnames);
+
+    var _propTypes2 = _interopRequireDefault(_propTypes);
 
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
@@ -220,57 +222,57 @@
         /**
          * The selected tab - either the index of it or the label string.  Defaults to tab 0 if not supplied
          */
-        selected: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.string]),
+        selected: _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string]),
 
         /**
          * Optional CSS class to apply to the Tabs component overall
          */
-        className: _react2.default.PropTypes.string,
+        className: _propTypes2.default.string,
 
         /**
          * Optional CSS style to apply to the Tabs component overall
          */
-        style: _react2.default.PropTypes.object,
+        style: _propTypes2.default.object,
 
         /**
          * Optional CSS class to apply to each tab header
          */
-        headerClass: _react2.default.PropTypes.string,
+        headerClass: _propTypes2.default.string,
 
         /**
          * Optional CSS style to apply to each tab header
          */
-        headerStyle: _react2.default.PropTypes.object,
+        headerStyle: _propTypes2.default.object,
 
         /**
          * Optional CSS class to apply to the active tab header
          */
-        activeHeaderClass: _react2.default.PropTypes.string,
+        activeHeaderClass: _propTypes2.default.string,
 
         /**
          * Optional CSS style to apply to the active tab header
          */
-        activeHeaderStyle: _react2.default.PropTypes.object,
+        activeHeaderStyle: _propTypes2.default.object,
 
         /**
          * Optional CSS class to apply to the content container for the currently selected tab
          */
-        contentClass: _react2.default.PropTypes.string,
+        contentClass: _propTypes2.default.string,
 
         /**
          * Optional CSS style to apply to the content container for the currently selected tab
          */
-        contentStyle: _react2.default.PropTypes.object,
+        contentStyle: _propTypes2.default.object,
 
         /**
          * Optional method to call when a tab is selected.  Receive the tab index and tab label of the selected tab
          */
-        onSelect: _react2.default.PropTypes.func,
+        onSelect: _propTypes2.default.func,
 
         /**
          * The child tabs to display - either an array or an element
          */
-        children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.array, _react2.default.PropTypes.element])
+        children: _propTypes2.default.oneOfType([_propTypes2.default.array, _propTypes2.default.element])
 
     };
     TabsComponent.defaultProps = {
@@ -313,42 +315,42 @@
         /**
          * Label to display as the tab header
          */
-        label: _react2.default.PropTypes.string.isRequired,
+        label: _propTypes2.default.string.isRequired,
 
         /**
          * Is this tab disabled?  Default: false
          */
-        disabled: _react2.default.PropTypes.bool,
+        disabled: _propTypes2.default.bool,
 
         /**
          * Optional CSS class to apply to the tab overall
          */
-        className: _react2.default.PropTypes.string,
+        className: _propTypes2.default.string,
 
         /**
          * Optional CSS style to apply to the tab overall
          */
-        style: _react2.default.PropTypes.object,
+        style: _propTypes2.default.object,
 
         /**
          * Optional CSS class to apply to the tab header
          */
-        headerClass: _react2.default.PropTypes.string,
+        headerClass: _propTypes2.default.string,
 
         /**
           * Optional CSS style to apply to the tab header
           */
-        headerStyle: _react2.default.PropTypes.object,
+        headerStyle: _propTypes2.default.object,
 
         /**
          * Optional CSS style to apply to the active tab header
          */
-        activeHeaderStyle: _react2.default.PropTypes.object,
+        activeHeaderStyle: _propTypes2.default.object,
 
         /**
          * Optional CSS class to apply to the tab header when active
          */
-        activeHeaderClass: _react2.default.PropTypes.string
+        activeHeaderClass: _propTypes2.default.string
     };
     ;
 

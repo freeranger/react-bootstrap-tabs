@@ -1,5 +1,6 @@
 import React    from 'react';
 import classes  from 'classnames';
+import PropTypes from 'prop-types';
 
 /**
  * React Bootstrap Tabs component
@@ -19,57 +20,57 @@ class TabsComponent extends React.Component {
         /**
          * The selected tab - either the index of it or the label string.  Defaults to tab 0 if not supplied
          */
-        selected: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
+        selected: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
         /**
          * Optional CSS class to apply to the Tabs component overall
          */
-        className: React.PropTypes.string,
+        className: PropTypes.string,
 
         /**
          * Optional CSS style to apply to the Tabs component overall
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
 
         /**
          * Optional CSS class to apply to each tab header
          */
-        headerClass: React.PropTypes.string,
+        headerClass: PropTypes.string,
 
         /**
          * Optional CSS style to apply to each tab header
          */
-        headerStyle: React.PropTypes.object,
+        headerStyle: PropTypes.object,
         
         /**
          * Optional CSS class to apply to the active tab header
          */
-        activeHeaderClass: React.PropTypes.string,
+        activeHeaderClass: PropTypes.string,
         
         /**
          * Optional CSS style to apply to the active tab header
          */
-        activeHeaderStyle: React.PropTypes.object,
+        activeHeaderStyle: PropTypes.object,
 
         /**
          * Optional CSS class to apply to the content container for the currently selected tab
          */
-        contentClass: React.PropTypes.string,
+        contentClass: PropTypes.string,
         
         /**
          * Optional CSS style to apply to the content container for the currently selected tab
          */
-        contentStyle: React.PropTypes.object,
+        contentStyle: PropTypes.object,
 
         /**
          * Optional method to call when a tab is selected.  Receive the tab index and tab label of the selected tab
          */
-        onSelect: React.PropTypes.func,
+        onSelect: PropTypes.func,
 
         /**
          * The child tabs to display - either an array or an element
          */
-        children: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.element])
+        children: PropTypes.oneOfType([PropTypes.array, PropTypes.element])
 
     }
 
@@ -234,42 +235,42 @@ class TabComponent extends React.Component {
         /**
          * Label to display as the tab header
          */
-        label: React.PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
 
         /**
          * Is this tab disabled?  Default: false
          */
-        disabled: React.PropTypes.bool,
+        disabled: PropTypes.bool,
 
         /**
          * Optional CSS class to apply to the tab overall
          */
-        className: React.PropTypes.string,
+        className: PropTypes.string,
 
         /**
          * Optional CSS style to apply to the tab overall
          */
-        style: React.PropTypes.object,
+        style: PropTypes.object,
 
         /**
          * Optional CSS class to apply to the tab header
          */
-        headerClass: React.PropTypes.string,
+        headerClass: PropTypes.string,
  
        /**
          * Optional CSS style to apply to the tab header
          */
-        headerStyle: React.PropTypes.object,
+        headerStyle: PropTypes.object,
 
         /**
          * Optional CSS style to apply to the active tab header
          */
-        activeHeaderStyle: React.PropTypes.object,
+        activeHeaderStyle: PropTypes.object,
         
         /**
          * Optional CSS class to apply to the tab header when active
          */
-        activeHeaderClass: React.PropTypes.string,
+        activeHeaderClass: PropTypes.string,
     }
 
     constructor(props) {
