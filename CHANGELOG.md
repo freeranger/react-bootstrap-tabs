@@ -7,3 +7,6 @@
 - Dependencies updated
 - Added custom styles
 - Custom classes now cascade 
+
+## 1.0.1 19 Mar 2016 
+- Migrated to use PropTypes from React.PropTypes
