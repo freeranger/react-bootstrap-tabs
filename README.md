@@ -8,6 +8,11 @@ You should have Bootstrap 4 installed already in your app.
 - [Demo Site](https://freeranger.github.io/react-bootstrap-tabs-demo)
 - [Demo project source](https://github.com/freeranger/react-bootstrap-tabs-demo)
 
+All of the features are demonstrated on the demo site so please see the source file:
+
+https://github.com/freeranger/react-bootstrap-tabs-demo/blob/master/app/App.js
+
+for examples of how to use it in your own applications.
 
 ## Usage
 
@@ -15,6 +20,7 @@ You should have Bootstrap 4 installed already in your app.
 ```
 npm install react-bootstrap-tabs --save
 ```
+
 
 ### 2. Import component
 
