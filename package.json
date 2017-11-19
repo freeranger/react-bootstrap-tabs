@@ -51,8 +51,8 @@
     "sinon": "^2.0.0"
   },
   "peerDependencies": {
-    "react": "~0.14.8 || ^15.0.0",
-    "react-dom": "~0.14.8 || ^15.0.0",
+    "react": ">=0.14.8 <= 16",
+    "react-dom": ">=0.14.8 <= 16",
     "prop-types": "^15.6.0"
   },
   "dependencies": {
