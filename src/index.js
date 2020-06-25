@@ -86,7 +86,7 @@ class TabsComponent extends React.Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         this.setState({ selected: nextProps.selected });
     }
 

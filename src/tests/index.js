@@ -373,8 +373,8 @@ describe('Tabs', () => {
             wrapper.setProps({selected: 1});
 
             // assert
-            expect(Tabs.prototype.componentWillReceiveProps.calledOnce).to.be.true;
-            Tabs.prototype.componentWillReceiveProps.restore();
+            expect(Tabs.prototype.UNSAFE_componentWillReceiveProps.calledOnce).to.be.true;
+            Tabs.prototype.UNSAFE_componentWillReceiveProps.restore();
         });
 
     });
