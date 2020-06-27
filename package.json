@@ -1,17 +1,17 @@
 {
-    "name": "react-bootstrap-tabs-rename-unsafe-lifecycles",
+    "name": "react-bootstrap-tabs",
     "version": "1.0.3",
     "description": "react tabs component using bootstrap 4",
     "repository": {
         "type": "git",
-        "url": "https://github.com/lidaof/react-bootstrap-tabs.git"
+        "url": "https://github.com/freeranger/react-bootstrap-tabs.git"
     },
-    "author": "lidaof",
+    "author": "freeranger",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/lidaof/react-bootstrap-tabs/issues"
+        "url": "https://github.com/freeranger/react-bootstrap-tabs/issues"
     },
-    "homepage": "https://github.com/lidaof/react-bootstrap-tabs",
+    "homepage": "https://github.com/freeranger/react-bootstrap-tabs",
     "keywords": [
         "react",
         "bootstrap",

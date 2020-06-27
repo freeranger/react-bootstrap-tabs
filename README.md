@@ -1,7 +1,5 @@
 # React Tabs component using Bootstrap 4&nbsp;&nbsp;[![npm version](https://badge.fury.io/js/react-bootstrap-tabs.svg)](https://www.npmjs.com/package/react-bootstrap-tabs) [![Build Status](https://semaphoreci.com/api/v1/freeranger/react-bootstrap-tabs/branches/master/badge.svg)](https://semaphoreci.com/freeranger/react-bootstrap-tabs)
 
-### forked from https://github.com/freeranger/react-bootstrap-tabs, removed lifecycle warning with `npx react-codemod rename-unsafe-lifecycles`
-
 This is a react component to render tabs using <a href="http://v4-alpha.getbootstrap.com/">Bootstrap 4</a> classes.
 You should have Bootstrap 4 installed already in your app.
 
