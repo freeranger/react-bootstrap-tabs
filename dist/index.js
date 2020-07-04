@@ -338,8 +338,8 @@
         headerClass: _propTypes2.default.string,
 
         /**
-          * Optional CSS style to apply to the tab header
-          */
+         * Optional CSS style to apply to the tab header
+         */
         headerStyle: _propTypes2.default.object,
 
         /**

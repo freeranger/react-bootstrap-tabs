@@ -112,8 +112,9 @@ class TabsComponent extends React.Component {
 
         return (
             <ul role="tablist" className="nav nav-tabs">
-                {Array.isArray(this.props.children) ? this.props.children.map(this._renderHeader.bind(this))
-                                                    : this._renderHeader(this.props.children, 0)
+                {Array.isArray(this.props.children) 
+                    ? this.props.children.map(this._renderHeader.bind(this))
+                    : this._renderHeader(this.props.children, 0)
                 }
             </ul>
         );
@@ -257,7 +258,7 @@ class TabComponent extends React.Component {
          */
         headerClass: PropTypes.string,
  
-       /**
+        /**
          * Optional CSS style to apply to the tab header
          */
         headerStyle: PropTypes.object,
