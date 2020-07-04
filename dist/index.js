@@ -120,8 +120,8 @@
         }
 
         _createClass(TabsComponent, [{
-            key: 'componentWillReceiveProps',
-            value: function componentWillReceiveProps(nextProps) {
+            key: 'UNSAFE_componentWillReceiveProps',
+            value: function UNSAFE_componentWillReceiveProps(nextProps) {
                 this.setState({ selected: nextProps.selected });
             }
         }, {
