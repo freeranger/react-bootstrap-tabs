@@ -10,3 +10,7 @@
 
 ## 1.0.1 19 Mar 2016 
 - Migrated to use PropTypes from React.PropTypes
+
+## 1.0.3 04 jul 2020 
+- componentWillReceiveProps renamed to UNSAFE_componentWillReceiveProps
+- Failing test (as a result) disabled - needs a load of package updates to fix
