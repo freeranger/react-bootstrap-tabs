@@ -1,10 +1,12 @@
-import React                        from 'react';
-
-import { shallow, mount, render }   from 'enzyme';
-import { expect }                   from 'chai';
-import sinon                        from 'sinon';
+import React                          from 'react';
+import { shallow, mount, configure }  from 'enzyme';
+import Adapter                        from 'enzyme-adapter-react-16';
+import { expect }                     from 'chai';
+import sinon                          from 'sinon';
 
 import {Tabs, Tab} from '../index';
+
+configure({adapter: new Adapter()});
 
 describe('Tabs', () => {
 
@@ -41,7 +43,7 @@ describe('Tabs', () => {
             const wrapper = shallow(<Tabs selected={1}><Tab label="Tab 1"></Tab><Tab label="Tab 2"></Tab></Tabs>);
 
             // assert
-            const activeLink = wrapper.find('.nav-link .active');
+            const activeLink = wrapper.find('.nav-link.active');
             expect(activeLink.length).to.equal(1, 'expected exactly one active link');
             expect(activeLink.text()).to.equal('Tab 2', 'text');
         });
@@ -77,7 +79,7 @@ describe('Tabs', () => {
                 const wrapper = mount(<Tabs className="class1"><Tab label="Tab 1" c>Tab 1</Tab></Tabs>);
 
                 // assert
-                expect(wrapper.find('.class1').length).to.equal(1);
+                expect(wrapper.hasClass('class1')).is.true;
             });
 
             it('should render a custom class for each tab header if one is specified at the tabs level', () => {
@@ -93,7 +95,7 @@ describe('Tabs', () => {
                 const wrapper = mount(<Tabs contentClass="class1"><Tab label="Tab 1">Tab 1</Tab><Tab label="Tab 2">Tab 2</Tab></Tabs>);
 
                 // assert
-                expect(wrapper.find('.tab-content .class1').length).to.equal(1);
+                expect(wrapper.find('.tab-content.class1').length).to.equal(1);
             });
 
             it('should render a custom class for the tab header if one is specified at the tab level', () => {
@@ -257,10 +259,10 @@ describe('Tabs', () => {
 
         it('should select the first tab if the selected index < 0', () =>{
             // act
-            const wrapper = shallow(<Tabs selected={-1}><Tab label="Tab 1"></Tab><Tab label="Tab 2"></Tab></Tabs>);
+            const wrapper = mount(<Tabs selected={-1}><Tab label="Tab 1"></Tab><Tab label="Tab 2"></Tab></Tabs>);
 
             // assert
-            expect(wrapper.state().selected).to.equal(0);
+            expect(wrapper.state().selected, wrapper.html()).to.equal(0);
         });
 
         it('should select the last tab if the selected index > the number of tabs - 41', () =>{
@@ -306,7 +308,7 @@ describe('Tabs', () => {
             wrapper.find('.nav-link').first().simulate('click', {preventDefault: () => undefined});
 
             // assert
-            const activeLink = wrapper.find('.nav-link .active');
+            const activeLink = wrapper.find('.nav-link.active');
             expect(activeLink.length).to.equal(1);
             expect(activeLink.text()).to.equal('Tab 1');
         });
@@ -364,9 +366,9 @@ describe('Tabs', () => {
             expect(wrapper.props().selected).to.equal(1);
         });
 
-        it.skip('should call UNSAFE_componentWillReceiveProps when a property changes', () => {
+        it('should call componentDidUpdate when a property changes', () => {
             // arrange
-            sinon.spy(Tabs.prototype, 'UNSAFE_componentWillReceiveProps');
+            sinon.spy(Tabs.prototype, 'componentDidUpdate');
             const wrapper = mount(<Tabs selected={0}><Tab label="Tab 1"></Tab><Tab label="Tab 2"></Tab></Tabs>);
 
             // act
@@ -375,8 +377,8 @@ describe('Tabs', () => {
             // assert
             // The below line doesn't work with the version of enzyme being referenced
             // https://github.com/enzymejs/enzyme/issues/1690
-            expect(Tabs.prototype.UNSAFE_componentWillReceiveProps.calledOnce).to.be.true;
-            Tabs.prototype.UNSAFE_componentWillReceiveProps.restore();
+            expect(Tabs.prototype.componentDidUpdate.calledOnce).to.be.true;
+            Tabs.prototype.componentDidUpdate.restore();
         });
 
     });
@@ -385,13 +387,8 @@ describe('Tabs', () => {
 describe('Tab', () => {
 
     it('should have a label prop', () => {
-        const wrapper = shallow(<Tab label="A tab"/>);
-        expect(wrapper.props().label).to.be.defined;
-    });
-
-    it('should have a disabled prop', () => {
-        const wrapper = shallow(<Tab label="A tab"/>);
-        expect(wrapper.props().disabled).to.be.defined;
+        const wrapper = mount(<Tab label="A tab"/>);
+        expect(wrapper.props()).to.have.property('label');
     });
 
     it('should not be disabled by default', () =>{

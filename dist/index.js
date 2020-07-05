@@ -119,10 +119,16 @@
             return _this;
         }
 
+        //  UNSAFE_componentWillReceiveProps(nextProps) {
+        //      this.setState({ selected: nextProps.selected });
+        //  }
+
         _createClass(TabsComponent, [{
-            key: 'UNSAFE_componentWillReceiveProps',
-            value: function UNSAFE_componentWillReceiveProps(nextProps) {
-                this.setState({ selected: nextProps.selected });
+            key: 'componentDidUpdate',
+            value: function componentDidUpdate(prevProps, prevState) {
+                if (prevState.selected !== this.state.selected) {
+                    this.setState({ selected: this.state.selected });
+                }
             }
         }, {
             key: 'render',
@@ -164,34 +170,12 @@
                 var selectedIndex = void 0;
                 if (typeof selected === 'number') {
                     selectedIndex = selected;
-                    if (selectedIndex < 0) {
-                        console.warn('tab index \'' + this.state.selected + '\' < 0, defaulting to first tab');
-                        selectedIndex = 0;
-                        selected = selectedIndex;
-                    } else {
-                        var tabCount = this.props.children.length || 1;
-                        if (selectedIndex > tabCount - 1) {
-                            console.warn('tab index \'' + this.state.selected + '\' > number of tabs (' + tabCount + ', defaulting to last tab');
-                            selectedIndex = tabCount - 1;
-                            selected = selectedIndex;
-                        }
-                    }
                 } else {
                     // selected is a string - should be the tab label so find the index of that tab
                     var selectedLabel = this.state.selected;
                     selectedIndex = onlyOneChild ? 0 : this.props.children.findIndex(function (child) {
                         return selectedLabel === child.props.label;
                     });
-                    if (selectedIndex < 0) {
-                        console.warn('tab \'' + this.state.selected + '\' not found, defaulting to first tab');
-                        selectedIndex = 0;
-                        selected = onlyOneChild ? this.props.children.props.label : this.props.children[selectedIndex].props.label;
-                    }
-                }
-
-                // If the selected tab has changed then we need to update the state
-                if (selected !== this.state.selected) {
-                    this.setState({ selected: selected });
                 }
 
                 var contentTab = onlyOneChild ? this.props.children : this.props.children[selectedIndex];
@@ -212,6 +196,48 @@
                 if (this.props.onSelect !== undefined) {
                     this.props.onSelect(index, this.props.children[index].props.label);
                 }
+            }
+        }], [{
+            key: 'getDerivedStateFromProps',
+            value: function getDerivedStateFromProps(nextProps, prevState) {
+
+                var onlyOneChild = !Array.isArray(nextProps.children);
+
+                var selected = nextProps.selected;
+
+                // Find the tab index - selected could be the index or could be the tab label
+                var selectedIndex = void 0;
+                if (typeof nextProps.selected === 'number') {
+                    selectedIndex = nextProps.selected;
+                    if (selectedIndex < 0) {
+                        console.warn('tab index \'' + nextProps.selected + '\' < 0, defaulting to first tab');
+                        selectedIndex = 0;
+                        selected = selectedIndex;
+                    } else {
+                        var tabCount = nextProps.children && nextProps.children.length || 1;
+                        if (selectedIndex > tabCount - 1) {
+                            console.warn('tab index \'' + nextProps.selected + '\' > number of tabs (' + tabCount + ', defaulting to last tab');
+                            selectedIndex = tabCount - 1;
+                            selected = selectedIndex;
+                        }
+                    }
+                } else {
+                    // selected is a string - should be the tab label so find the index of that tab
+                    var selectedLabel = nextProps.selected;
+                    selectedIndex = onlyOneChild ? 0 : nextProps.children.findIndex(function (child) {
+                        return selectedLabel === child.props.label;
+                    });
+                    if (selectedIndex < 0) {
+                        console.warn('tab \'' + nextProps.selected + '\' not found, defaulting to first tab');
+                        selectedIndex = 0;
+                        selected = onlyOneChild ? nextProps.children.props.label : nextProps.children[selectedIndex].props.label;
+                    }
+                }
+
+                if (selected !== nextProps.selected) {
+                    return { selected: selected };
+                }
+                return null;
             }
         }]);
 
